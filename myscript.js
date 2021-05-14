@@ -6,6 +6,7 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const password2 = document.getElementById('check');
 const phone = document.getElementById('phone');
+const office = document.getElementById('office');
 
 
 const fns=document.getElementById("fns");
@@ -20,17 +21,18 @@ const phs=document.getElementById("phs");
 var fnr = /^[a-zA-Z]+$/;
 var un= /^[a-zA-Z0-9\_]+$/;
 var phn = /^\d+$/;
-var passw=  /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])+$/;
-var emm=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(?:\.[a-z]+)*$/;
+
+var emm=/^([a-zA-Z0-9_]+).(@).([a-z]+).(\.)(com|in|org|edu)$/;
 
 var fnm=first.value.match(fnr);
 var lnm=last.value.match(fnr);
 var phnn=phone.value.match(phn);
-var pasn=password.value.match(passw);
 var unm=username.value.match(un);
 var emm=email.value.match(emm);
 
 function myFunction() {
+    var pasn=password.value;
+    var passw=  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).+$/;
     flag=0;
     if(first.value === '') {
 		fns.innerText="Cannot be blank";
@@ -85,7 +87,7 @@ function myFunction() {
         pas.innerText="Should be 8-20 in length";
         flag=1;
     }
-    else if(pasn === null)
+    else if(!pasn.match(passw))
     {
         pas.innerText="Should have small,caps,number,special char";
         flag=1;
@@ -94,6 +96,12 @@ function myFunction() {
     if(password.value != password2.value)
     {
         pasc.innerText="Password doesn't match";
+        flag=1;
+    }
+
+    if(office.value == 'c')
+    {
+        os.innerText = "choose an office/department";
         flag=1;
     }
 
